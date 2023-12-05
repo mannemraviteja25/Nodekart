@@ -1,11 +1,13 @@
 const app = require('express')();
 
-const homePage = require('./routes/homepage.js')
+const homeRoute = require('./routes/home.js');
+const userRoute = require('./routes/users.js');
 
 const port = 3000;
 
 
-app.use('/home',homePage);
+app.use('/home',homeRoute);
+app.use('/user',userRoute);
 
 
 
