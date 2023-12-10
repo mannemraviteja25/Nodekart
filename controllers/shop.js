@@ -14,3 +14,19 @@ const Product = require('../models/product');
       console.log(err);
   });
   };
+
+  exports.getProduct = (req,res,next)=>{
+    const prodId = req.params.prodId;
+    Product.findByPk(prodId)
+    .then((product)=>{
+        res.render('shop/product-detail',{
+            product: product,
+            pageTitle: product.title,
+            path :'/products'
+        })
+    })
+        .catch(err=>{
+            console.log(err);
+    }
+    )
+  }
