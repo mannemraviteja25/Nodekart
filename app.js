@@ -8,14 +8,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-const homeRoute = require("./routes/home.js");
 const userRoute = require("./routes/users.js");
 const adminRoute = require("./routes/admin.js");
 const sequelize = require("./util/database.js");
 
 const port = 3000;
 
-app.use("/home", homeRoute);
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 
