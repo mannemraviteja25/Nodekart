@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const adminRoutes = require("../controllers/admin");
+const adminController = require("../controllers/admin");
 
-router.post("/add-product", adminRoutes.postAddProduct);
-router.get("/", adminRoutes.getAddProduct);
+router.post("/add-product", adminController.postAddProduct);
+router.get("/", adminController.getAddProduct);
 
-router.get("/products", adminRoutes.getProducts);
+router.get("/products", adminController.getProducts);
 
 router.get("/account", (req, res) => {
   // res.render("../views/admin/admin_account.ejs");
