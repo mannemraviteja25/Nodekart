@@ -2,7 +2,7 @@ const router = require("express").Router();
 const adminController = require("../controllers/admin");
 
 router.post("/add-product", adminController.postAddProduct);
-router.get("/edit-product:prodId", adminController.getEditProduct);
+router.get("/edit-products:prodId", adminController.getEditProduct);
 
 router.get("/products", adminController.getProducts);
 
