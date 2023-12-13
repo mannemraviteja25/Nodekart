@@ -3,6 +3,7 @@
     max-width: 90%;
     margin: auto;
     display: block;
+    align-items: start;
 }
 
 .product-item {

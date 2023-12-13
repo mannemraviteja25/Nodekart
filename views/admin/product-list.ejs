@@ -28,7 +28,8 @@
                                 </div>
                                 <div class="card__actions">
                                     <a href="admin/edit-products<%= product.id %>" class="btn">Edit</a>
-                                    <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                                    <!-- <%- include('../includes/add-to-cart.ejs', {product: product}) %> -->
+                                    <a href="admin/delete-product<%=product.id %>" class="btn danger">Delete</a>
                                 </div>
                             </article>
                             <% } %>
