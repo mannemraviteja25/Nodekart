@@ -18,6 +18,9 @@ const port = 3000;
 app.use("/user", userRoute);
 app.use("/",shopRoute);
 app.use("/admin", adminRoute);
+app.get('/', (req,res)=>{
+  res.send("Hii This is home page and by the way how u doing ??")
+})
 
 sequelize
   .sync()
