@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const z = require('zod');
 const { verifyAdmin } = require('../middleware/users');
+const idGenerator = require('../idGenerator');
 
 const adminSchema = {
     email: z.string().email(),
@@ -75,8 +76,14 @@ router.post('/signin',async (req,res,next)=>{
 })
 
 
-router.post('/add-product',(req,res,next)=>{
+router.post('/add-product', verifyAdmin, (req,res,next)=>{
     // add products logic
+    const { titile , description , price , img} = req.body;
+    const courseId = idGenerator;
+    
+    Course.create({title , description , price , img , courseId});
+
+
 })
 
 router.post('/edit-products',(req,res,next)=>{
