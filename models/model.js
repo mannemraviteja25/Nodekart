@@ -65,6 +65,12 @@ const CourseSchema = new mongoose.Schema({
     img:{
         type: String,
         require: true
+    },
+    courseId: {
+        type: String,
+        required: true,
+        unique: true,
+        primarykey: true
     }
 });
 

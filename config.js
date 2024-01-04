@@ -1,9 +1,12 @@
-const DB_url = "mongodb+srv://root:admin@cluster0.lz5uy4y.mongodb.net/";
-const JWT_password = "roamroambhaiyoo"
+const  dotenv =require('dotenv').config();
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJtYW5uZWVtcmF2aUBnbWFpbC5jb20iLCJ1c2VybmFtZSI6IlJhdmk1MTEiLCJpYXQiOjE3MDQzNjI2OTcsImV4cCI6MTcwNDM2NjI5N30.f7CLa_wtI5eNV0HtW_OGBJDRGh6vYZ8LAre7BR4Xoik"
+
+const DB_url = process.env.DB_URL;
+const JWT_password = process.env.JWT_PASSWORD;
+const token = process.env.TOKEN;
 
 module.exports = {
     DB_url,
-    JWT_password
-}
+    JWT_password,
+    token
+};
