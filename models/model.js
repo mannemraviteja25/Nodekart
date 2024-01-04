@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const DB_url = require('../config.js')
+const {DB_url} = require('../config.js')
 
 // Connect to MongoDB
 mongoose.connect(DB_url);
@@ -8,9 +8,15 @@ mongoose.connect(DB_url);
 // Define schemas
 const AdminSchema = new mongoose.Schema({
     // Schema definition here
+    email:{
+        type: String,
+        require: true,
+        unique: true
+    },
     username:{
         type: String,
-        require: true
+        require: true,
+        unique: true,
     },
     password:{
         type: String,
@@ -23,9 +29,15 @@ const AdminSchema = new mongoose.Schema({
 
 const UserSchema = new mongoose.Schema({
     // Schema definition here
+    email:{
+        type: String,
+        require: true,
+        unique: true
+    },
     username:{
         type: String,
-        require: true
+        require: true,
+        unique: true
     },
     password:{
         type: String,
