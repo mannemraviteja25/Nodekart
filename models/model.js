@@ -22,8 +22,8 @@ const AdminSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  courseId: {
-    type: [Number],
+  courseIds: {
+    type: [String],
     default: []
   }
 });
@@ -44,8 +44,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  courseId: {
-    type: [Number],
+  courseIds: {
+    type: [String],
     default: []
   }
 });

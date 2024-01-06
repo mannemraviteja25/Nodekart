@@ -75,31 +75,83 @@ router.post('/signin', async (req, res, next) => {
 })
 
 
-router.post('/add-products', verifyAdmin, async (req, res, next) => {
-  // add products logic
-  const { title, description, price, img } = req.body;
-  try {
-    console.log(title, description, price, img)
-    const courseId = idGenerator();
-    const token = req.headers.token;
-    console.log(token)
-    const adminUsername = jwt.decode(token)
-    console.log(adminUsername);
-    const admin = await Admin.findOneAndUpdate(
-      { username: adminUsername },
-      { $push: { courseId: courseId } },
-      { new: true }
-    )
-    console.log(admin);
-    const course = await Course.create({ title, description, price, img, courseId });
-    console.log(course)
-    res.send(admin);
-  }
-  catch (error) {
-    console.log(error);
-  }
 
-})
+
+
+router.post('/add-product', verifyAdmin, async (req, res, next) => {
+  const { title, description, price, img } = req.body;
+
+  try {
+    // Step 1: Decode the JWT token
+    const token = req.headers.token; // Assuming the token is included in the Authorization header
+    const decodedToken = jwt.decode(token, 'JWT_password');
+
+    if (!decodedToken) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+    console.log(decodedToken.userId);
+
+    // Step 2: Find the admin using the userId
+    const admin = await Admin.findOne({ email: decodedToken.userId });
+
+    console.log(admin);
+
+    if (!admin) {
+      return res.status(404).json({ error: 'Admin not found' });
+    }
+
+    // Step 3: Append the courseId to the admin's document
+    const courseId = idGenerator();
+    console.log(courseId)
+    admin.courseIds.push(courseId);
+
+    // Assuming the field is named courseIds
+
+    // Save the updated admin document
+    await admin.save();
+
+    // Create the course
+    const course = await Course.create({
+      title,
+      description,
+      price,
+      img,
+      courseId,
+    });
+
+    console.log(course);
+    res.json(course);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err });
+  }
+});
+
+
+//router.post('/add-product', verifyAdmin, async (req, res, next) => {
+// add products logic
+// const { title, description, price, img } = req.body;
+//  try {
+//    console.log(title, description, price, img)
+//    const courseId = idGenerator();
+//    const token = req.headers.token;
+//    console.log(token)
+//    const adminUsername = jwt.decode(token)
+//    console.log(adminUsername);
+//    const admin = await Admin.findOneAndUpdate(
+//      { username: adminUsername },
+//      { $push: { courseId: courseId } },
+//      { new: true }
+//    )
+//    console.log(admin);
+//    const course = await Course.create({ title, description, price, img, courseId });
+//    console.log(course)
+//  }
+// catch (error) {
+//    console.log(error);
+//  }
+//
+//})
 
 router.post('/edit-products/:courseId', verifyAdmin, async (req, res, next) => {
   try {
